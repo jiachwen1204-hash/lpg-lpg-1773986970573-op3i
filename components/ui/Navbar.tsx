@@ -4,20 +4,15 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-// @lpg: Update navLinks labels and hrefs to match the company's page type.
-// For 1-Page: use anchor links (#services, #about, #contact)
-// For 5-Pages: use real routes (/about, /services, /contact, /faq)
-// IMPORTANT: Keep this static array — only change label/href values.
-// Do NOT replace with .map() on a string array or compute hrefs dynamically.
 const navLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'About',    href: '#about'    },
-  { label: 'Contact',  href: '#contact'  },
+  { label: 'Platform', href: '#features' },
+  { label: 'Solutions', href: '#solutions' },
+  { label: 'About', href: '#about' },
+  { label: 'Pricing', href: '#pricing' },
 ]
 
-// @lpg: Replace with real company name and CTA
-const BRAND_NAME = 'Company Name'
-const CTA = { label: 'Get Started', href: '#contact' }
+const BRAND_NAME = 'Zentrix AI'
+const CTA = { label: 'Start Free Trial', href: '#contact' }
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -34,7 +29,7 @@ export default function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-surface/95 backdrop-blur-md border-b border-surface-border shadow-card'
+          ? 'bg-[#0f0f13]/95 backdrop-blur-md border-b border-[#2a2a3a] shadow-card'
           : 'bg-transparent',
       )}
     >
@@ -43,7 +38,7 @@ export default function Navbar() {
           href="/"
           className="font-heading font-bold text-xl text-content-primary hover:text-brand-500 transition-colors"
         >
-          {BRAND_NAME}
+          <img src="https://u5ft5besqtymo1lf.public.blob.vercel-storage.com/logos/1773986969004-ai-artificial-intelligence-improves-emai-600nw-2655586379.webp" alt="Zentrix AI logo" className="h-10 w-auto object-contain" />
         </Link>
 
         <ul className="hidden md:flex items-center gap-1">
@@ -51,7 +46,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="px-4 py-2 text-sm text-content-muted hover:text-content-primary rounded-card hover:bg-surface-raised transition-colors"
+                className="px-4 py-2 text-sm text-content-secondary hover:text-content-primary rounded-card hover:bg-[#17171f] transition-colors"
               >
                 {link.label}
               </a>
@@ -71,21 +66,21 @@ export default function Navbar() {
         <button
           onClick={() => setOpen(v => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="md:hidden p-2 rounded-card text-content-muted hover:text-content-primary hover:bg-surface-raised transition-colors"
+          className="md:hidden p-2 rounded-card text-content-secondary hover:text-content-primary hover:bg-[#17171f] transition-colors"
         >
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </nav>
 
       {open && (
-        <div className="md:hidden bg-surface border-b border-surface-border">
+        <div className="md:hidden bg-[#0f0f13] border-b border-[#2a2a3a]">
           <ul className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
             {navLinks.map(link => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-3 text-sm text-content-muted hover:text-content-primary rounded-card hover:bg-surface-raised transition-colors"
+                  className="block px-4 py-3 text-sm text-content-secondary hover:text-content-primary rounded-card hover:bg-[#17171f] transition-colors"
                 >
                   {link.label}
                 </a>
@@ -94,6 +89,7 @@ export default function Navbar() {
             <li className="pt-2">
               <a
                 href={CTA.href}
+                onClick={() => setOpen(false)}
                 className="block px-5 py-3 text-sm font-medium text-center bg-brand-500 text-content-inverse rounded-card"
               >
                 {CTA.label}
